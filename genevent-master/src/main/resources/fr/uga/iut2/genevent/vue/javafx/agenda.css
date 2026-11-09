@@ -1,0 +1,61 @@
+
+.btn-festival-event {
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6px 10px;
+    -fx-background-radius: 4px;
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 99, 235, 0.15), 4, 0, 0, 1);
+}
+
+.btn-festival-event:hover {
+    -fx-background-color: #1D4ED8;
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 99, 235, 0.25), 6, 0, 0, 2);
+}
+
+
+.btn-festival-event {
+    -fx-background-radius: 4px;
+}
+
+
+.festival-start {
+    -fx-background-radius: 4px 0px 0px 4px;
+    -fx-margin: 0 -8px 0 0;
+}
+
+
+.festival-middle {
+    -fx-background-radius: 0px;
+    -fx-opacity: 0.85;
+}
+
+
+.festival-end {
+    -fx-background-radius: 0px 4px 4px 0px;
+}
+
+
+.calendar-grid-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+}
+
+.calendar-grid-cell:hover {
+    -fx-border-color: #2563EB;
+    -fx-effect: dropshadow(three-pass-box, rgba(37, 99, 235, 0.1), 8, 0, 0, 2);
+}
+
+
+.calendar-day-number {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #111827;
+}

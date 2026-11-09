@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox spacing="32.0" styleClass="content-container"
+      xmlns="http://javafx.com/javafx/18"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@agenda.css" />
+    </stylesheets>
+
+    <padding>
+        <Insets top="36.0" right="40.0" bottom="40.0" left="40.0" />
+    </padding>
+    <children>
+
+        <HBox alignment="CENTER_LEFT" spacing="16.0">
+            <children>
+                <VBox HBox.hgrow="ALWAYS" spacing="4.0">
+                    <children>
+                        <Label text="PLANNING &amp; TIMELINE" styleClass="dashboard-subtitle" />
+                        <Label fx:id="titleLabel" text="Agenda" styleClass="dashboard-title" />
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER" spacing="20.0">
+                    <children>
+
+                        <HBox alignment="CENTER" spacing="6.0">
+                            <children>
+                                <TextField fx:id="searchSubDate"
+                                           promptText="JJ/MM/AAAA"
+                                           styleClass="search-date-field"/>
+                                <Button mnemonicParsing="false"
+                                        onAction="#handleDateSelect"
+                                        text="🔍"
+                                        styleClass="btn-search-icon"/>
+                            </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER" spacing="6.0">
+                            <children>
+                                <Button mnemonicParsing="false" text="◀" styleClass="btn-action-summer, btn-month-nav" onAction="#handlePreviousMonth"/>
+                                <Label fx:id="monthYearLabel" text="Juin 2026" styleClass="section-title, month-navigation-label" />
+                                <Button mnemonicParsing="false" text="▶" styleClass="btn-action-summer, btn-month-nav" onAction="#handleNextMonth"/>
+                            </children>
+                        </HBox>
+
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+
+        <VBox styleClass="section-panel" spacing="16.0">
+            <padding>
+                <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
+            </padding>
+            <children>
+
+                <GridPane hgap="10.0" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" halignment="CENTER" />
+                    </columnConstraints>
+                    <children>
+                        <Label text="LUN" styleClass="card-header" GridPane.columnIndex="0" />
+                        <Label text="MAR" styleClass="card-header" GridPane.columnIndex="1" />
+                        <Label text="MER" styleClass="card-header" GridPane.columnIndex="2" />
+                        <Label text="JEU" styleClass="card-header" GridPane.columnIndex="3" />
+                        <Label text="VEN" styleClass="card-header" GridPane.columnIndex="4" />
+                        <Label text="SAM" styleClass="card-header" GridPane.columnIndex="5" />
+                        <Label text="DIM" styleClass="card-header" GridPane.columnIndex="6" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="calendarGrid" hgap="8.0" vgap="8.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28" />
+                    </columnConstraints>
+                </GridPane>
+            </children>
+        </VBox>
+
+        <StackPane VBox.vgrow="ALWAYS">
+            <children>
+                <VBox fx:id="emptyStateBox" styleClass="empty-state-box" alignment="CENTER" spacing="10.0" minHeight="120.0">
+                    <padding>
+                        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
+                    </padding>
+                    <children>
+                        <Label text="📅" styleClass="empty-state-icon" style="-fx-font-size: 32px;" />
+                        <Label text="Aucun festival ce mois-ci" styleClass="empty-state-title" />
+                        <Label text="Créez un festival depuis le tableau de bord pour le voir apparaître sur le calendrier."
+                               styleClass="empty-state-hint"
+                               wrapText="true"
+                               maxWidth="400.0" />
+                    </children>
+                </VBox>
+
+                <VBox fx:id="carouselContainer" spacing="24.0" visible="false" managed="false">
+                    <children>
+                        <Label text="Aperçu des festivals du mois" style="-fx-font-family: 'Segoe UI', sans-serif; -fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #111827;" />
+
+                        <HBox alignment="CENTER" spacing="12.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#handleCarouselPrev" text="◀"
+                                        style="-fx-background-color: #E0F2FE; -fx-text-fill: #2563EB; -fx-font-weight: bold; -fx-background-radius: 50%; -fx-min-width: 40px; -fx-min-height: 40px; -fx-max-width: 40px; -fx-max-height: 40px; -fx-cursor: hand; -fx-border-color: #BFDBFE; -fx-border-width: 1px; -fx-border-radius: 50%;" />
+
+                                <ScrollPane fx:id="carouselScrollPane" HBox.hgrow="ALWAYS" vbarPolicy="NEVER" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;">
+                                    <content>
+                                        <HBox fx:id="cardContainer" spacing="20.0" style="-fx-padding: 10px 5px;" />
+                                    </content>
+                                </ScrollPane>
+
+                                <Button mnemonicParsing="false" onAction="#handleCarouselNext" text="▶"
+                                        style="-fx-background-color: #E0F2FE; -fx-text-fill: #2563EB; -fx-font-weight: bold; -fx-background-radius: 50%; -fx-min-width: 40px; -fx-min-height: 40px; -fx-max-width: 40px; -fx-max-height: 40px; -fx-cursor: hand; -fx-border-color: #BFDBFE; -fx-border-width: 1px; -fx-border-radius: 50%;" />
+                            </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER" spacing="12.0">
+                            <children>
+                                <Label fx:id="dot1" text="●" style="-fx-text-fill: #2563EB; -fx-font-size: 16px;" />
+                                <Label fx:id="dot2" text="●" style="-fx-text-fill: #10B981; -fx-font-size: 16px;" />
+                                <Label fx:id="dot3" text="●" style="-fx-text-fill: #F59E0B; -fx-font-size: 16px;" />
+                                <Label fx:id="dot4" text="●" style="-fx-text-fill: #2563EB; -fx-font-size: 16px;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+
+    </children>
+</VBox>

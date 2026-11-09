@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="32.0" styleClass="content-container" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="36.0" />
+    </padding>
+    <children>
+
+        <HBox alignment="CENTER_LEFT" spacing="16.0">
+            <children>
+                <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label styleClass="dashboard-subtitle" text="BACKOFFICE PRODUCTION" />
+                        <Label styleClass="dashboard-title" text="Dashboard" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <VBox spacing="12.0" styleClass="section-panel">
+            <padding>
+                <Insets bottom="20.0" left="24.0" right="24.0" top="20.0" />
+            </padding>
+            <children>
+                <Label styleClass="section-title" text="Prochain évènement" />
+                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                    <children>
+                        <Label fx:id="nextEventLabel" styleClass="section-hint" text="Aucun évènement programmé pour le moment." wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#handleAjoutEvent" styleClass="btn-create-primary" text="Créer un nouvel évènement" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <VBox spacing="14.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                    <children>
+                        <Label styleClass="section-title" text="Évènements récents" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <StackPane VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox fx:id="emptyEventBox" alignment="CENTER" minHeight="110.0" spacing="10.0" styleClass="empty-state-box">
+                            <padding>
+                                <Insets bottom="28.0" left="24.0" right="24.0" top="28.0" />
+                            </padding>
+                            <children>
+                                <Label styleClass="empty-state-icon" text="🎪" />
+                                <Label styleClass="empty-state-title" text="Aucun évènement enregistré" />
+                                <Label maxWidth="380.0" styleClass="empty-state-hint" text="Créez votre premier festival pour voir apparaître les données ici." wrapText="true" />
+                                <HBox alignment="CENTER" spacing="12.0">
+                                    <VBox.margin>
+                                        <Insets top="4.0" />
+                                    </VBox.margin>
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#handleAjoutEvent" styleClass="big-action-btn, btn-pink-outline" text="➕  Nouveau Festival" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox fx:id="eventListBox" managed="false" spacing="16.0" visible="false">
+                            <padding>
+                                <Insets bottom="8.0" left="4.0" right="4.0" top="8.0" />
+                            </padding>
+                            <children>
+                                <ScrollPane hbarPolicy="NEVER" maxHeight="190.0" minHeight="190.0" prefHeight="190.0" style="-fx-background-color: transparent; -fx-padding: 0; -fx-background: transparent; -fx-border-color: transparent;" vbarPolicy="AS_NEEDED">
+                                    <content>
+                                        <VBox fx:id="eventListContainer" prefWidth="480.0" spacing="10.0" style="-fx-background-color: transparent;" />
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+            </children>
+        </VBox>
+
+        <VBox spacing="14.0">
+            <children>
+                <Label styleClass="section-title" text="Indicateurs" />
+                <GridPane hgap="18.0" vgap="18.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                    </columnConstraints>
+                    <children>
+
+                        <VBox spacing="8.0" styleClass="stat-card, card-blue" GridPane.columnIndex="0">
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label styleClass="card-icon" text="🎤" />
+                                        <Label styleClass="card-header" text="LINE-UP TOTAL" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="cardArtistValue" styleClass="card-value" text="—" />
+                                <Label fx:id="cardArtistFooter" styleClass="card-footer" text="Aucun artiste confirmé" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="stat-card, card-green" GridPane.columnIndex="1">
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label styleClass="card-icon" text="🎪" />
+                                        <Label styleClass="card-header" text="SCÈNES EXTÉRIEURES" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="cardVenueValue" styleClass="card-value" text="—" />
+                                <Label fx:id="cardVenueFooter" styleClass="card-footer" text="Aucune infrastructure définie" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="stat-card, card-yellow" GridPane.columnIndex="2">
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label styleClass="card-icon" text="💵" />
+                                        <Label styleClass="card-header" text="FINANCES" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="cardBudgetValue" styleClass="card-value" text="—" />
+                                <Label fx:id="cardBudgetFooter" styleClass="card-footer" text="Aucun festival actif" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="stat-card, card-purple" GridPane.columnIndex="3">
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label styleClass="card-icon" text="📈" />
+                                        <Label styleClass="card-header" text="RÉSULTAT ESTIMÉ" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="cardBenefitValue" styleClass="card-value" text="—" />
+                                <Label fx:id="cardBenefitFooter" styleClass="card-footer" text="Aucun bénéfice estimé" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+            </children>
+        </VBox>
+    </children>
+</VBox>
